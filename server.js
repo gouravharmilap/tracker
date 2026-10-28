@@ -51,6 +51,11 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.listen(PORT, () => {
-  console.log(`\n  Instagram Account Tracker running at http://localhost:${PORT}\n`);
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`\n  Instagram Account Tracker running at http://localhost:${PORT}\n`);
+  });
+}
+
+// Export for serverless platforms (Vercel, etc.)
+module.exports = app;
